@@ -1,6 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import MainPage from './MainPage.jsx'
 import Settings from './Settings.jsx'
@@ -8,21 +6,18 @@ import Create from './Create.jsx'
 import Edit from './Edit.jsx'
 import './App.css'
 
-const Stack = createNativeStackNavigator();
-
-function RootStack() {
+function App() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Main" component={MainPage} />
-    </Stack.Navigator>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/edit" element={<Edit />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  );
-}
+export default App
 
