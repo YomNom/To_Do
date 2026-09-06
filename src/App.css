@@ -204,7 +204,7 @@
   flex: 0 0 32px;
 }
 
-#logo {
+#header-bar .main-logo {
   display: block;
   height: 100%;
   width: auto;
