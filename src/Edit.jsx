@@ -2,7 +2,7 @@ import { useActionState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './Forms.css'
 
-function Edit({ tasks, setTasks }) {
+function Edit({ tasks, editTask }) {
   const navigate = useNavigate()
   const { index } = useParams()
   const taskIndex = Number(index)
@@ -10,19 +10,16 @@ function Edit({ tasks, setTasks }) {
   const today = new Date().toLocaleDateString('en-CA')
 
   // Handles the submission asynchronously, returns to main page
-  async function handleSubmit(prevData, formData) {
+  async function handleSubmit(formData) {
     const taskName = formData.get('taskName'); // Matches input name attribute
     const dueDate = formData.get('dueDate'); // Matches input name attribute
 
+    // Makes sure the task name is not empty, the due date is not empty, and the due date is not in the past
     if (!taskName?.trim() || !dueDate || dueDate < today) {
       return { success: false };
     }
     
-    setTasks(currentTasks => currentTasks.map((currentTask, currentIndex) => (
-      currentIndex === taskIndex
-        ? { ...currentTask, taskName, dueDate }
-        : currentTask
-    )));
+    editTask(taskIndex, taskName, dueDate)
     navigate('/')
 
     return { success: true };

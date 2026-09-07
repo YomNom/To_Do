@@ -1,31 +1,14 @@
 import pencilIcon from './assets/pencil.svg';
 import deleteLogo from './assets/trashcan.svg';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from './mutateTasks';
 import './TaskList.css';
 
-function TaskList({ tasks, setTasks, filter, sortBy, sortDirection }) {
+// Task List component that displays a list of tasks with filtering and sorting capabilities
+function TaskList({ tasks, deleteTask, toggleComplete, filter, sortBy, sortDirection }) {
     const navigate = useNavigate();
 
-    function deleteTask(index) {
-        setTasks(currentTasks => currentTasks.filter((_, taskIndex) => taskIndex !== index));
-    }
-
-    function toggleComplete(index) {
-        setTasks(currentTasks => currentTasks.map((task, taskIndex) => {
-            if (taskIndex === index) {
-                return { ...task, completed: !task.completed };
-            } else {
-                return task;
-            }
-        }));
-    }
-     
-    // Formats date to Month Day, Year (e.g., September 4, 2026)
-    function formatDate(date) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(date).toLocaleDateString('en-US', options);
-    }
-
+    // Filter and sort tasks based on the provided criteria
     const visibleTasks = tasks
         .map((task, index) => ({ task, index }))
         .filter(({ task }) => (

@@ -4,14 +4,15 @@ import './Forms.css'
 
 function Create({ createTask }) {
   const navigate = useNavigate()
-  const today = new Date().toLocaleDateString('en-CA')
 
   // Handles the submission asynchronously, returns to main page
-  async function handleSubmit(prevData, formData) {
+  async function handleSubmit(formData) {
     const taskName = formData.get('taskName'); // Matches input name attribute
     const dueDate = formData.get('dueDate'); // Matches input name attribute
-
-    if (!taskName?.trim() || !dueDate || dueDate < today) {
+    const today = new Date().toLocaleDateString('en-CA') // Used to ensure the due date is not in the past
+    
+    // Ensures the task name is not empty, the due date is not empty, and the due date is not in the past
+    if (!taskName?.trim() || !dueDate || dueDate < today) { 
       return { success: false };
     }
     
@@ -31,7 +32,7 @@ function Create({ createTask }) {
           <label htmlFor="taskName">To-Do Item Name</label>
           <input type="text" name="taskName" placeholder="Task Name" required />
           <label htmlFor="dueDate">Select Due Date</label>
-          <input type="date" name="dueDate" min={today} required /> 
+          <input type="date" name="dueDate" min={new Date().toLocaleDateString('en-CA')} required lang="en-US" />
           <button type="submit">Save</button>
         </div>
       </form>

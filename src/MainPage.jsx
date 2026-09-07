@@ -3,7 +3,7 @@ import gearLogo from './assets/gear.svg'
 import TaskList from './TaskList.jsx'
 import { Link } from 'react-router-dom'
 
-function MainPage({ tasks, setTasks, filter, sortBy, sortDirection }) {
+function MainPage({ tasks, deleteTask, toggleComplete, filter, sortBy, sortDirection }) {
     return (
         <section id="top-section">
             <div id="header-bar">
@@ -17,7 +17,8 @@ function MainPage({ tasks, setTasks, filter, sortBy, sortDirection }) {
             </div>
             <TaskList
                 tasks={tasks}
-                setTasks={setTasks}
+                deleteTask={deleteTask}
+                toggleComplete={toggleComplete}
                 filter={filter}
                 sortBy={sortBy}
                 sortDirection={sortDirection}

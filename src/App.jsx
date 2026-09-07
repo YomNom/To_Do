@@ -5,32 +5,14 @@ import MainPage from './MainPage.jsx'
 import Settings from './Settings.jsx'
 import Create from './Create.jsx'
 import Edit from './Edit.jsx'
+import { useTasks } from './mutateTasks.jsx'
 import './App.css'
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      taskName: 'First Task',
-      completed: false,
-      dueDate: '2026-09-04',
-      creationDate: '2026-09-03'
-    }
-  ])
+  const { tasks, createTask, editTask, deleteTask, toggleComplete } = useTasks()
   const [filter, setFilter] = useState('all')
   const [sortBy, setSortBy] = useState('due')
   const [sortDirection, setSortDirection] = useState('asc')
-
-  function createTask(taskName, dueDate) {
-    setTasks((currentTasks) => [
-      ...currentTasks,
-      {
-        taskName,
-        completed: false,
-        dueDate,
-        creationDate: new Date()
-      }
-    ])
-  }
 
   return (
     <BrowserRouter>
@@ -40,7 +22,8 @@ function App() {
           element={
             <MainPage
               tasks={tasks}
-              setTasks={setTasks}
+              deleteTask={deleteTask}
+              toggleComplete={toggleComplete}
               filter={filter}
               sortBy={sortBy}
               sortDirection={sortDirection}
@@ -61,7 +44,7 @@ function App() {
           }
         />
         <Route path="/create" element={<Create createTask={createTask} />} />
-        <Route path="/edit/:index" element={<Edit tasks={tasks} setTasks={setTasks} />} />
+        <Route path="/edit/:index" element={<Edit tasks={tasks} editTask={editTask} />} />
       </Routes>
     </BrowserRouter>
   )

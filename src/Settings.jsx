@@ -1,25 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import './Forms.css'
 
-function Settings({
-  filter,
-  setFilter,
-  sortBy,
-  setSortBy,
-  sortDirection,
-  setSortDirection
-}) {
+function Settings({ filter, setFilter, sortBy, setSortBy, sortDirection, setSortDirection }) {
   const navigate = useNavigate();
 
   async function handleSubmit(event) { 
     event.preventDefault();
     const formData = new FormData(event.target);
-    const filter = formData.get('filter');
-    const sortBy = formData.get('sort');
-    const sortDirection = formData.get('sort-date-direction');
-    setFilter(filter);
-    setSortBy(sortBy);
-    setSortDirection(sortDirection);
+    const newFilter = formData.get('filter');
+    const newSortBy = formData.get('sort');
+    const newSortDirection = formData.get('sort-date-direction');
+    setFilter(newFilter);
+    setSortBy(newSortBy);
+    setSortDirection(newSortDirection);
 
     navigate('/');
   }
