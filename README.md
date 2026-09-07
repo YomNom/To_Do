@@ -7,7 +7,7 @@ To run this application, have the following installed:
 * Node Package Manager
 NOTE: Will not run without the specified Node.js version
 
-Install everything with the command: 
+After cloning or downloading project, install everything with the command: 
 > npm install
 
 To start the application, run the following in command prompt:
